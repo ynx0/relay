@@ -27,8 +27,8 @@ def main():
     ctx = zmq.Context()
     # noinspection PyUnresolvedReferences
     pub = ctx.socket(zmq.PUB)
-    pub.bind('tcp://*:%s' % common.port)
-    logger.info('Publishing on port: %s' % common.port)
+    pub.bind('tcp://*:%s' % common.pub_port)
+    logger.info('Publishing on port: %s' % common.pub_port)
 
     def send_data(event: kbd.KeyboardEvent):
         logger.info("Publishing key event: " + event.name + ' ' + event.event_type)

@@ -11,16 +11,16 @@ port: int = None
 try:
     port = int(sys.argv[0])
 except ValueError:
-    logger.error("Provide a port to connect to")
+    port = common.sub_port
+    logger.warn("No port provided, falling back to port %s set in common.py file" % port)
     exit(1)
-
 
 
 def main():
     ctx = zmq.Context()
     sub = ctx.socket(zmq.SUB)
 
-    logger.info("Subscribing to to: %s:%s" % (common.host, common.port))
+    logger.info("Subscribing to to: %s:%s" % (common.host, common.pub_port))
 
     sub.connect('tcp://%s:%s' % (common.host, port))
 
