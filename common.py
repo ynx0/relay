@@ -1,5 +1,5 @@
-host = '192.168.0.107'
-port = 2222
+host = '0.tcp.ngrok.io'
+port = 16946
 
 
 class Topics:  # ALL TOPICS MUST BE BYTES

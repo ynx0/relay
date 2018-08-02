@@ -3,7 +3,7 @@ import zmq
 import common
 from logzero import logger
 
-TARGET_DELTA = 0.02
+TARGET_DELTA = 0.005
 
 
 def main():
@@ -26,12 +26,14 @@ def main():
         return delta > TARGET_DELTA
 
     while True:
+        if kbd.is_pressed('alt+backspace'):
+            exit(0)
 
         kbd_event: kbd.KeyboardEvent = sub.recv_pyobj()
 
         if should_exec(kbd_event):
             key = kbd_event.name
-            kbd.send(key, True, False) if kbd_event.event_type == kbd.KEY_DOWN else str('a')  # kbd.release(key)
+            kbd.send(key, True, False) if kbd_event.event_type == kbd.KEY_DOWN else kbd.release(key)
             logger.info("Pressed key: " + str(kbd_event))
             print("=================")
         else:
