@@ -13,14 +13,14 @@ try:
 except ValueError:
     port = common.sub_port
     logger.warn("No port provided, falling back to port %s set in common.py file" % port)
-    exit(1)
+    #exit(1)
 
 
 def main():
     ctx = zmq.Context()
     sub = ctx.socket(zmq.SUB)
 
-    logger.info("Subscribing to to: %s:%s" % (common.host, common.pub_port))
+    logger.info("Subscribing to to: %s:%s" % (common.host, common.sub_port))
 
     sub.connect('tcp://%s:%s' % (common.host, port))
 
